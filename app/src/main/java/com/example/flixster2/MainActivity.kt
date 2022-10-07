@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
+import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.flixster2.databinding.ActivityMainBinding
 //import com.example.flixster2.BuildConfig.API_KEY
@@ -23,8 +24,8 @@ fun createJson() = Json {
     useAlternativeNames = false
 }
 private const val TAG = "MainActivity/"
-private const val SEARCH_API_KEY = "a12a2bda520f75a2f5ad0313476bd8ce"
-private const val MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/movie/popular?api_key=a12a2bda520f75a2f5ad0313476bd8ce&language=en-US&page=1"
+private const val SEARCH_API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+private const val MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
 
 class MainActivity : AppCompatActivity() {
     private val movies = mutableListOf<Movie>()
@@ -49,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 
         }
         val client = AsyncHttpClient()
+        val params = RequestParams()
+        //params["api-key"] = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         client.get(MOVIE_SEARCH_URL, object : JsonHttpResponseHandler() {
 
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
