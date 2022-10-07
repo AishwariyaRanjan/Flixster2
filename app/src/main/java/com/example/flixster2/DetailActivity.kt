@@ -1,6 +1,7 @@
 package com.example.flixster2
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,8 @@ class DetailActivity : AppCompatActivity(){
         // TODO: Set the title, byline, and abstract information from the article
         titleTextView.text = movie.title
         abstractTextView.text = movie.description
+        Log.d("DebugDetailActivity-title", titleTextView.text.toString())
+        Log.d("DebugDetailActivity-abstract", titleTextView.text.toString())
         // TODO: Load the media image
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/w500/"+movie.movieImageUrl)

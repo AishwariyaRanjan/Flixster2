@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.content.Intent
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -45,6 +46,8 @@ class MovieAdapter (private val context: Context, private val movies: List<Movie
         fun bind(movie: Movie) {
             titleTextView.text = movie.title
             abstractTextView.text = movie.description
+            Log.d("DebugAdapter-title", titleTextView.text.toString())
+            Log.d("DebugAdapter-abstract", titleTextView.text.toString())
 
             Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500/"+movie.movieImageUrl)
@@ -56,7 +59,7 @@ class MovieAdapter (private val context: Context, private val movies: List<Movie
 
             // TODO: Navigate to Details screen and pass selected article
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("MOVIE_EXTRA", movie?)
+            intent.putExtra("MOVIE_EXTRA", movie)
             context.startActivity(intent)
         }
     }

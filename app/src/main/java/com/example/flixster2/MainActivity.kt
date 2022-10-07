@@ -6,10 +6,10 @@ import android.util.Log
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-//import com.codepath.articlesearch.databinding.ActivityMainBinding
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.flixster2.databinding.ActivityMainBinding
+//import com.example.flixster2.BuildConfig.API_KEY
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.serialization.json.Json
@@ -23,8 +23,8 @@ fun createJson() = Json {
     useAlternativeNames = false
 }
 private const val TAG = "MainActivity/"
-private const val SEARCH_API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"//API_KEY
-private const val MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/movie/popular?api_key=${SEARCH_API_KEY}&language=en-US&page=1"
+private const val SEARCH_API_KEY = "a12a2bda520f75a2f5ad0313476bd8ce"
+private const val MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/movie/popular?api_key=a12a2bda520f75a2f5ad0313476bd8ce&language=en-US&page=1"
 
 class MainActivity : AppCompatActivity() {
     private val movies = mutableListOf<Movie>()
@@ -45,17 +45,11 @@ class MainActivity : AppCompatActivity() {
         moviesRecyclerView.layoutManager = LinearLayoutManager(this).also {
             val dividerItemDecoration = DividerItemDecoration(this, it.orientation)
             moviesRecyclerView.addItemDecoration(dividerItemDecoration)
+            Log.d("DebugMainActivity", "end of onCreate")
+
         }
         val client = AsyncHttpClient()
         client.get(MOVIE_SEARCH_URL, object : JsonHttpResponseHandler() {
-            override fun onFailure(
-                statusCode: Int,
-                headers: Headers?,
-                response: String?,
-                throwable: Throwable?
-            ) {
-                Log.e(TAG, "Failed to fetch articles: $statusCode")
-            }
 
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.i(TAG, "Successfully fetched articles: $json")
@@ -73,12 +67,20 @@ class MainActivity : AppCompatActivity() {
                     var models : List<Movie> = gson.fromJson(moviesRawJSON, arrayMovieType)
                     models.let{list ->
                     movies.addAll(list)}
-
+                    Log.d("DebugMovies-MainActivity", movies.toString())
                     movieAdapter.notifyDataSetChanged()
 
                 } catch (e: JSONException) {
                     Log.e(TAG, "Exception: $e")
                 }
+            }
+            override fun onFailure(
+                statusCode: Int,
+                headers: Headers?,
+                response: String?,
+                throwable: Throwable?
+            ) {
+                Log.e(TAG, "Failed to fetch articles: $statusCode")
             }
 
         })
