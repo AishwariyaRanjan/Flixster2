@@ -14,20 +14,23 @@ class DetailActivity : AppCompatActivity(){
     private lateinit var abstractTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("DebugDetailActivity", "very start detailactivity")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
+        Log.i("DebugDetailActivity", "start detailactivity")
 
         // TODO: Find the views for the screen
         mediaImageView = findViewById(R.id.mediaImage)
         titleTextView = findViewById(R.id.mediaTitle)
         abstractTextView = findViewById(R.id.mediaAbstract)
         // TODO: Get the extra from the Intent
-        val movie = intent.getSerializableExtra(MOVIE_EXTRA) as Movie
+        val movie = intent.getSerializableExtra("MOVIE_EXTRA") as Movie
         // TODO: Set the title, byline, and abstract information from the article
         titleTextView.text = movie.title
         abstractTextView.text = movie.description
-        Log.d("DebugDetailActivity-title", titleTextView.text.toString())
-        Log.d("DebugDetailActivity-abstract", titleTextView.text.toString())
+        Log.i("DebugDetailActivity-title", titleTextView.text.toString())
+        Log.i("DebugDetailActivity-abstract", titleTextView.text.toString())
         // TODO: Load the media image
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/w500/"+movie.movieImageUrl)
