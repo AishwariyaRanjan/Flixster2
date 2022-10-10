@@ -38,6 +38,8 @@ class MovieAdapter (private val context: Context, private val movies: List<Movie
         private val mediaImageView = itemView.findViewById<ImageView>(R.id.mediaImage)
         private val titleTextView = itemView.findViewById<TextView>(R.id.mediaTitle)
         private val abstractTextView = itemView.findViewById<TextView>(R.id.mediaAbstract)
+        private val releaseDateTextView = itemView.findViewById<TextView>(R.id.mediaReleaseDate)
+        private val voteTextView = itemView.findViewById<TextView>(R.id.mediaVoteAverage)
 
         init {
             itemView.setOnClickListener(this)
@@ -46,13 +48,16 @@ class MovieAdapter (private val context: Context, private val movies: List<Movie
         // TODO: Write a helper method to help set up the onBindViewHolder method
         fun bind(movie: Movie) {
             titleTextView.text = movie.title
-            abstractTextView.text = movie.description
+            //abstractTextView.text = movie.description
             Log.i("DebugAdapter-title", titleTextView.text.toString())
             Log.i("DebugAdapter-abstract", titleTextView.text.toString())
 
             Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500/"+movie.movieImageUrl)
                 .into(mediaImageView)
+
+//            releaseDateTextView.text = movie.release_data
+//            voteTextView.text = movie.vote_average
         }
         override fun onClick(v: View?) {
             Log.i("DebugAdapter", "in onClick")

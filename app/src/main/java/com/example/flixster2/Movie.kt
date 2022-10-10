@@ -16,4 +16,10 @@ data class Movie (
 
     @SerializedName("poster_path")
     var movieImageUrl : String? = null,
+
+    @SerializedName("release_date")
+    var release_date : String? = null,
+
+    @SerializedName("vote_average")
+    var vote_average : String? = null,
 ) : java.io.Serializable

@@ -24,8 +24,8 @@ fun createJson() = Json {
     useAlternativeNames = false
 }
 private const val TAG = "MainActivity/"
-private const val SEARCH_API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-private const val MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
+private const val SEARCH_API_KEY = BuildConfig.API_KEY //"a07e22bc18f5cb106bfe4cc1f83ad8ed"
+private const val MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/movie/popular?api_key=${SEARCH_API_KEY}&language=en-US&page=1"
 
 class MainActivity : AppCompatActivity() {
     private val movies = mutableListOf<Movie>()
